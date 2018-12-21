@@ -8,10 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class JDBCUtil {
-	private static final String Driver = "com.mysql.cj.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost:3306/db_project1?characterEncoding=utf8&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
-	private static final String username = "root";
-	private static final String password = "15773272279wt..A";
+	private static final String Driver = "com.mysql.jdbc.Driver";
+	private static final String URL = "jdbc:mysql://localhost:3306/servlet?characterEncoding=utf8&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
+	private static final String username = "myuser";
+	private static final String password = "123456";
 
 	public static Connection getConnection() {//获取数据库连接
 		Connection connection=null;
