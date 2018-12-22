@@ -17,7 +17,7 @@
 			$(location).attr('href', 'publishMessage.jsp');
 		});
 		$("#btn2").click(function() {
-			$(location).attr('href', 'login.jsp');
+			$(location).attr('href', 'index.jsp');
 		});
 	});
 </script>

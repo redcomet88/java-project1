@@ -1,76 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored ="false"%><!--注意要老版的jsp要加上isELIgnored ="false"  -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<script src="static/jquery-3.2.1.min.js"
-	type="text/javascript"></script>
-<title>Index</title>
-<!--自定义的jquery-->
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#btn1").click(function() {//页面跳转
-			$(location).attr('href', 'login.jsp');
-		});
-		$("#btn2").click(function() {
-			$(location).attr('href', 'register.jsp');
-		});
-	});
-</script>
-<!-- Bootstrap -->
-<link href="./index/bootstrap.css" rel="stylesheet">
-<link href="./index/font-awesome.css" rel="stylesheet">
-<link href="./index/bootstrap-theme.css" rel="stylesheet">
-<link rel="stylesheet" href="./index/animations.css">
-
-<!-- siimple style -->
-<link href="./index/style.css" rel="stylesheet">
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-<![endif]-->
+<title>Login</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/custom.css">
+	<!-- Favicon and touch icons -->
+	<link rel="shortcut icon" href="assets/ico/favicon.png">
 </head>
-
 <body>
 
-	<div class="cloud floating">
-		<img src="./index/cloud.png" alt="Scoop Themes">
-	</div>
-
-	<div class="cloud pos1 fliped floating">
-		<img src="./index/cloud.png" alt="Scoop Themes">
-	</div>
-
-	<div class="cloud pos2 floating">
-		<img src="./index/cloud.png" alt="Scoop Themes">
-	</div>
-
-	<div class="cloud pos3 fliped floating">
-		<img src="./index/cloud.png" alt="Scoop Themes">
-	</div>
-
-
-	<div id="wrapper" style="height: 686px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-12">
-					<img src="./index/logo.png" alt="等一等，马上加载出来" /> <br> <br>
-					<button id="btn1" class="btn btn-success">登录</button>
-					&nbsp;&nbsp;
-					<button id="btn2" class="btn btn-warning">注册</button>
-					<br>
-				</div>
-
-				<div class="row">
-					<div class="col-lg-6 col-lg-offset-3">
-						<p class="copyright">Copyright © 2018 上海电机学院万涛</p>
-					</div>
-				</div>
+<body>
+<div class="container ">
+	<div class="row">
+		<div class="login-container col-lg-4 col-md-6 col-sm-8 col-xs-12">
+			<div class="login-title text-center">
+				<h2><span>抽奖<strong>系统</strong></span></h2>
 			</div>
-		</div>
+			<div class="login-content">
+				<div class="login-header ">
+					<h3><strong>欢迎,</strong></h3>
+					<h5>这是一个抽奖系统，还在测试中，如有问题请反馈给我们</h5>
+				</div>
+				<div class="login-body">
+					<form role="form" action="LoginServlet" method="post" class="login-form">
+						<div class="form-group ">
+							<div class="pos-r">
+								<input   id="employeeName" name="employeeName" type="text"  placeholder="Username..." class="form-username form-control">
+								<i class="fa fa-user"></i>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="pos-r">
+								<input  id="password" name="employeePassword" type="password"  placeholder="Password..." class="form-password form-control" >
+								<i class="fa fa-lock"></i>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary form-control"><strong>登录</strong></button>
+							<button type="submit" style="margin-top: 10px;background-color:greenyellow;border-color: yellow" class="btn btn-primary form-control"><strong>游客登录</strong></button>
+						</div>
+
+					</form>
+				</div> <!-- end  login-body -->
+			</div><!-- end  login-content -->
+			<div class="login-footer text-center template">
+				<h5>您还没有账号?<a href="register.jsp" class="bold"> 注册 </a>     </h5>
+			</div>
+		</div>  <!-- end  login-container -->
+
+	</div>
+</div><!-- end container -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
 </body>
 </html>

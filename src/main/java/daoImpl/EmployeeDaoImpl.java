@@ -16,7 +16,7 @@ import util.JDBCUtil;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 	public void addEmployee(Employee employee) {
-		String sql = "insert into tb_employee(employeeName,employeeSex,employeeBirth,employeePhone,employeePlace,joinTime,password,isLead) values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into tb_employee(employeeName,employeeSex,employeeBirth,employeePhone,employeePlace,joinTime,employeePassword,isLead) values(?,?,?,?,?,?,?,?)";
 		Connection connection = JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

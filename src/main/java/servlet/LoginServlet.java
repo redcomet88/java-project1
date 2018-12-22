@@ -29,10 +29,11 @@ public class LoginServlet extends HttpServlet {
 		String employeePassword = request.getParameter("employeePassword");
 		if (check(employeeName, employeePassword)) {
 			request.getSession().setAttribute("employee", new EmployeeDaoImpl().findEmployeeByName(employeeName));// 将employee保存到session
-			response.sendRedirect("show.jsp");
+			request.setAttribute("employee", new EmployeeDaoImpl().findEmployeeByName(employeeName));
+			response.sendRedirect("nineindex.jsp");
 		} else {
 			request.setAttribute("error", "账号或者密码错误");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 
 	}
