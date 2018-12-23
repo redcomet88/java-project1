@@ -5,6 +5,12 @@
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
 	<servlet>
+		<servlet-name>LotteryServlet</servlet-name>
+		<display-name>LotteryServlet</display-name>
+		<description></description>
+		<servlet-class>servlet.LotteryServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>RegisterServlet</servlet-name>
 		<display-name>RegisterServlet</display-name>
 		<description></description>
@@ -43,6 +49,10 @@
 	<servlet-mapping>
 		<servlet-name>RegisterServlet</servlet-name>
 		<url-pattern>/RegisterServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LotteryServlet</servlet-name>
+		<url-pattern>/LotteryServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>

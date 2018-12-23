@@ -78,8 +78,27 @@
                             alert('💔很遗憾，您没有中奖~');
                             break;
                     }
+
+                    $.ajax({
+                        url:'${ctx}/LotteryServlet',
+                        type:'POST',
+                        async:true,    //或false,是否异步
+                        data:{index: index,userid :${employee.employeeId}},
+                        timeout:5000,    //超时时间
+                        dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                        success:function(data){
+                           //这个无所谓成功失败
+                        },
+                        error:function(xhr,textStatus){
+                            alert('💔很遗憾，奖品已经发完了~');
+                        }
+                    })
                 }
+
+
             }).render(canvas, context, ratio);
+
+
 
 		</script>
 
