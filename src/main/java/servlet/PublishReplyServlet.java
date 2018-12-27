@@ -33,7 +33,6 @@ public class PublishReplyServlet extends HttpServlet {
 		try {
 			reply.setReplyTime(new SimpleDateFormat("yyyy-MM-dd").parse(replyTime));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		request.getSession().setAttribute("reply", reply);

@@ -15,7 +15,7 @@
 
 	<body class="activity-lottery-winning">
 		<div class="main">
-			<marquee direction="right"><h2>当前登陆者为${employee.employeeName} 中奖者为:<span id="winner"> JOKE  </span></h2></marquee>
+			<marquee direction="right"><h2>当前登陆者为${employee.employeeName} 中奖者为:<span id="winner"></span></h2></marquee>
 			<div style="text-align: center;margin: 100px 0 0 0">
 				<canvas id="canvas" width="320px" height="320px" style="width: 320px;height: 320px;"></canvas>
 			</div>
@@ -93,6 +93,8 @@
                             alert('💔很遗憾，奖品已经发完了~');
                         }
                     })
+
+                    $("#winner").text('${employee.employeeName}');
                 }
 
 

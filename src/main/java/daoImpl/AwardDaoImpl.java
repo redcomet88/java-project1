@@ -6,6 +6,8 @@ import dao.AwardDao;
 import util.JDBCUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AwardDaoImpl implements AwardDao {
 	public void addAwardRecord(AwardRecord record) {
@@ -32,7 +34,7 @@ public class AwardDaoImpl implements AwardDao {
 	}
 
 	public Award findAwardByIndex(int index) {
-		String sql = "select * from tb_award where index=?";
+		String sql = "select * from tb_award where `index` = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Connection connection = null;
@@ -66,7 +68,7 @@ public class AwardDaoImpl implements AwardDao {
 	}
 
 	public void updateAward(Award award) {
-		String sql = "update tb_award_record set stock = ? where index = ?";
+		String sql = "update tb_award_record set stock = ? where `index` = ?";
 		Connection connection = JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -83,6 +85,40 @@ public class AwardDaoImpl implements AwardDao {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
 		}
+	}
+
+	public List<Award> findAllAwards() {
+		List<Award> awards=new ArrayList();
+		Award award=null;
+		Connection connection=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from tb_award";
+		try {
+			connection=JDBCUtil.getConnection();
+			pstmt=connection.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				award = new Award();
+				award.setIndex(rs.getInt(1));
+				award.setAwardName(rs.getString(2));
+				award.setStock(rs.getInt(3));
+				award.setImage(rs.getString(4));
+				award.setColumn1(rs.getInt(5));
+				award.setColumn2(rs.getString(6));
+				awards.add(award);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(connection);
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		}
+
+		return awards;
 	}
 
 }

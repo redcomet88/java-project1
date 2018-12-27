@@ -43,7 +43,7 @@
 
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary form-control"><strong>登录</strong></button>
-							<button type="submit" style="margin-top: 10px;background-color:greenyellow;border-color: yellow" class="btn btn-primary form-control"><strong>游客登录</strong></button>
+							<button type="submit" style="margin-top: 10px;background-color:greenyellow;border-color: yellow" class="btn btn-primary form-control" formaction="LoginServlet?employeeName=anonymous"><strong>游客登录</strong></button>
 						</div>
 
 					</form>

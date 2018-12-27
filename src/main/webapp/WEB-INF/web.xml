@@ -11,6 +11,12 @@
 		<servlet-class>servlet.LotteryServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>AwardServlet</servlet-name>
+		<display-name>AwardServlet</display-name>
+		<description></description>
+		<servlet-class>servlet.AwardServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>RegisterServlet</servlet-name>
 		<display-name>RegisterServlet</display-name>
 		<description></description>
@@ -74,5 +80,8 @@
 		<servlet-name>ShowReplyServlet</servlet-name>
 		<url-pattern>/ShowReplyServlet</url-pattern>
 	</servlet-mapping>
-
+	<servlet-mapping>
+		<servlet-name>AwardServlet</servlet-name>
+		<url-pattern>/AwardServlet</url-pattern>
+	</servlet-mapping>
 </web-app>
