@@ -68,7 +68,7 @@ public class AwardDaoImpl implements AwardDao {
 	}
 
 	public void updateAward(Award award) {
-		String sql = "update tb_award_record set stock = ? where `index` = ?";
+		String sql = "update tb_award_record set stock = ? where award_index = ?";
 		Connection connection = JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

@@ -1,0 +1,205 @@
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: servlet
+-- ------------------------------------------------------
+-- Server version	5.7.17-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `tb_award`
+--
+
+DROP TABLE IF EXISTS `tb_award`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_award` (
+  `index` int(11) NOT NULL AUTO_INCREMENT,
+  `award_name` varchar(80) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `column1` int(11) DEFAULT NULL,
+  `column2` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_award`
+--
+
+LOCK TABLES `tb_award` WRITE;
+/*!40000 ALTER TABLE `tb_award` DISABLE KEYS */;
+INSERT INTO `tb_award` VALUES (1,'30元话费',100,NULL,0,NULL),(2,'iphoneX',2,NULL,0,NULL),(3,'未中奖',9999,NULL,0,NULL),(4,'MackBook Pro',1,NULL,0,NULL),(5,'超强游戏主机',10,'https://img12.360buyimg.com/n7/jfs/t4807/209/1436278963/496606/8e486549/58f0884eNcec87657.jpg',1,NULL),(6,'海南3日游',5,NULL,0,NULL),(7,'魔声耳机',55,'https://img11.360buyimg.com/n7/jfs/t3187/325/423764794/213696/f4eb1dbd/57b68142Nbe104228.jpg',1,NULL),(8,'火星一日游',12,NULL,0,NULL);
+/*!40000 ALTER TABLE `tb_award` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_award_record`
+--
+
+DROP TABLE IF EXISTS `tb_award_record`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_award_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `award_index` int(11) DEFAULT NULL,
+  `userid` varchar(255) DEFAULT NULL,
+  `finished` varchar(2) DEFAULT NULL,
+  `column1` int(11) DEFAULT NULL,
+  `column2` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_award_record`
+--
+
+LOCK TABLES `tb_award_record` WRITE;
+/*!40000 ALTER TABLE `tb_award_record` DISABLE KEYS */;
+INSERT INTO `tb_award_record` VALUES (1,6,'4','0',0,''),(2,6,'4','0',0,''),(3,5,'2','0',0,''),(4,6,'2','0',0,''),(5,5,'2','0',0,''),(6,6,'2','0',0,''),(7,7,'2','0',0,''),(8,0,'2','0',0,''),(9,3,'2','0',0,''),(10,1,'3','0',0,''),(11,2,'3','0',0,''),(12,1,'0','0',0,''),(13,7,'4','0',0,'');
+/*!40000 ALTER TABLE `tb_award_record` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_criticism`
+--
+
+DROP TABLE IF EXISTS `tb_criticism`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_criticism` (
+  `criticismId` int(11) NOT NULL AUTO_INCREMENT,
+  `criticismContent` text,
+  `employeeId` int(11) DEFAULT NULL,
+  `criticismTime` datetime DEFAULT NULL,
+  `messageId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`criticismId`),
+  KEY `fk_criticism_message` (`messageId`),
+  KEY `fk_criticism_employee` (`employeeId`),
+  CONSTRAINT `fk_criticism_employee` FOREIGN KEY (`employeeId`) REFERENCES `tb_employee` (`employeeId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_criticism_message` FOREIGN KEY (`messageId`) REFERENCES `tb_message` (`messageId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_criticism`
+--
+
+LOCK TABLES `tb_criticism` WRITE;
+/*!40000 ALTER TABLE `tb_criticism` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_criticism` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_employee`
+--
+
+DROP TABLE IF EXISTS `tb_employee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_employee` (
+  `employeeId` int(11) NOT NULL AUTO_INCREMENT,
+  `employeeName` varchar(255) DEFAULT NULL,
+  `employeeSex` varchar(255) DEFAULT NULL,
+  `employeeBirth` date DEFAULT NULL,
+  `employeePhone` varchar(255) DEFAULT NULL,
+  `employeePlace` varchar(255) DEFAULT NULL,
+  `joinTime` date DEFAULT NULL,
+  `employeePassword` varchar(255) DEFAULT NULL,
+  `isLead` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`employeeId`),
+  KEY `employeeId` (`employeeId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_employee`
+--
+
+LOCK TABLES `tb_employee` WRITE;
+/*!40000 ALTER TABLE `tb_employee` DISABLE KEYS */;
+INSERT INTO `tb_employee` VALUES (1,'万涛','male','1997-12-31','18221390332','上海浦东新区','2017-12-31','123','\0'),(2,'admin','female','1993-12-31','15773272278','湖南常德','2017-12-31','123','\0'),(3,'jack','male','2017-12-31','18899882212','南京草场门','2017-12-31','123','\0'),(4,'123','男','2017-12-31','8908080','9808089','2017-12-31','11','\0');
+/*!40000 ALTER TABLE `tb_employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_message`
+--
+
+DROP TABLE IF EXISTS `tb_message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_message` (
+  `messageId` int(11) NOT NULL AUTO_INCREMENT,
+  `messageTitle` varchar(255) DEFAULT NULL,
+  `messageContent` text,
+  `employeeId` int(11) DEFAULT NULL,
+  `publishTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`messageId`),
+  KEY `fk_message_employee` (`employeeId`),
+  CONSTRAINT `fk_message_employee` FOREIGN KEY (`employeeId`) REFERENCES `tb_employee` (`employeeId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_message`
+--
+
+LOCK TABLES `tb_message` WRITE;
+/*!40000 ALTER TABLE `tb_message` DISABLE KEYS */;
+INSERT INTO `tb_message` VALUES (1,'致橡树','我如果爱你——\r\n绝不像攀援的凌霄花，\r\n借你的高枝炫耀自己；\r\n我如果爱你——\r\n绝不学痴情的鸟儿，\r\n为绿荫重复单调的歌曲；\r\n也不止像泉源，\r\n常年送来清凉的慰藉；\r\n也不止像险峰，\r\n增加你的高度，衬托你的威仪。',1,'2018-05-09 00:00:00');
+/*!40000 ALTER TABLE `tb_message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_reply`
+--
+
+DROP TABLE IF EXISTS `tb_reply`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_reply` (
+  `replyId` int(11) NOT NULL AUTO_INCREMENT,
+  `replyContent` text,
+  `employeeId` int(11) DEFAULT NULL,
+  `replyTime` datetime DEFAULT NULL,
+  `messageId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`replyId`),
+  KEY `fk_reply_employee` (`employeeId`),
+  KEY `fk_reply_message` (`messageId`),
+  CONSTRAINT `fk_reply_employee` FOREIGN KEY (`employeeId`) REFERENCES `tb_employee` (`employeeId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_reply_message` FOREIGN KEY (`messageId`) REFERENCES `tb_message` (`messageId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_reply`
+--
+
+LOCK TABLES `tb_reply` WRITE;
+/*!40000 ALTER TABLE `tb_reply` DISABLE KEYS */;
+INSERT INTO `tb_reply` VALUES (1,'这首诗写的太好了',1,'2018-05-12 00:00:00',1);
+/*!40000 ALTER TABLE `tb_reply` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-12-29  8:50:06

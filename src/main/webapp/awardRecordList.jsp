@@ -8,14 +8,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="layui/css/layui.css"  media="all">
 	<!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-<title>奖品库存管理</title>
+<title>兑奖管理</title>
 
 </head>
 <body>
 
 
+
 <blockquote class="layui-elem-quote layui-text">
-   奖品管理页面
+   兑奖管理页面
 </blockquote>
 
 <table class="layui-hide" id="test" lay-filter="demo"></table>
