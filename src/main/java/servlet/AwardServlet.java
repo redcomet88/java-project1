@@ -1,6 +1,7 @@
 package servlet;
 
 import bean.Award;
+import bean.AwardRecord;
 import daoImpl.AwardDaoImpl;
 import util.JSON;
 
@@ -53,6 +54,24 @@ public class AwardServlet extends HttpServlet {
             award.setStock(Integer.parseInt(stock));
             System.out.println("awardName:" + award.getAwardName() + "stock:"+ stock);
             awardDao.updateAward(award);
+        }
+        else if (null != opt && "searchRecord".equals(opt)){
+            List<AwardRecord> list = awardDao.findAllAwardRecords();
+            Map<String, Object> result = new HashMap<>();
+            result.put("code", 0);
+            result.put("count", 100);
+            result.put("data", list);
+            response.getWriter().write(JSON.Encode(result));
+        }
+        else if (null != opt && "updateRecord".equals(opt)){
+            String stock = request.getParameter("stock");
+            String index = request.getParameter("id");
+
+            AwardRecord record = awardDao.findAwardRecordById(Integer.parseInt(index));
+            record.setFinished("1");
+            System.out.println("updateRecord:" + "index:"+ index);
+            awardDao.updateAwardRecord(record);
+           // response.getWriter().write(JSON.Encode(result));
         }
     }
 }

@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("employee", new EmployeeDaoImpl().findEmployeeByName(employeeName));
 			}
 			if("admin".equals(employeeName) ){
-				response.sendRedirect("awardList.jsp");
+				response.sendRedirect("layui.html");
 			} else
 			{
 				response.sendRedirect("nineindex.jsp");

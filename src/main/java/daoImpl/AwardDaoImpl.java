@@ -68,10 +68,9 @@ public class AwardDaoImpl implements AwardDao {
 	}
 
 	public void updateAward(Award award) {
-		String sql = "update tb_award_record set stock = ? where award_index = ?";
+		String sql = "update tb_award set stock = ? where award_index = ?";
 		Connection connection = JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
 		try {
 			pstmt = connection.prepareStatement(sql);
@@ -83,7 +82,6 @@ public class AwardDaoImpl implements AwardDao {
 		} finally {
 			JDBCUtil.close(connection);
 			JDBCUtil.close(pstmt);
-			JDBCUtil.close(rs);
 		}
 	}
 
@@ -119,6 +117,106 @@ public class AwardDaoImpl implements AwardDao {
 		}
 
 		return awards;
+	}
+
+	public List<AwardRecord> findAllAwardRecords(){
+		List<AwardRecord> records=new ArrayList();
+		AwardRecord record=null;
+		Connection connection=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select  a.*,b.award_name,c.employeeName  from  tb_award_record a, tb_award b,tb_employee c  " +
+				"where a.award_index = b.`index` and a.userid = c.employeeId";
+		try {
+			connection=JDBCUtil.getConnection();
+			pstmt=connection.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				record = new AwardRecord();
+				record.setId(rs.getInt(1));
+				record.setAwardIndex(rs.getInt(2));
+				record.setUserId(rs.getString(3));
+				if(null == rs.getString(4)|| "0".equals(rs.getString(4)))
+				{
+					record.setFinished("未兑奖");
+				}
+				else
+				{
+					record.setFinished("已兑奖");
+				}
+				//record.setFinished(rs.getString(4));
+				record.setColumn1(rs.getInt(5));
+				record.setColumn2(rs.getString(6));
+				record.setAwardName(rs.getString(7));
+				record.setUserName(rs.getString(8));
+				records.add(record);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(connection);
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		}
+
+		return records;
+	}
+
+	public AwardRecord findAwardRecordById(int id){
+
+
+		System.out.println(id);
+
+		String sql = "select * from tb_award_record where `id` = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Connection connection = null;
+		AwardRecord record = new AwardRecord();
+		try {
+			connection = JDBCUtil.getConnection();
+			pstmt = connection.prepareStatement(sql);
+			pstmt.setInt(1,id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				record.setId(rs.getInt(1));
+				record.setAwardIndex(rs.getInt(2));
+				record.setUserId(rs.getString(3));
+				record.setFinished(rs.getString(4));
+				record.setColumn1(rs.getInt(5));
+				record.setColumn2(rs.getString(6));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			JDBCUtil.close(connection);
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		}
+		return record;
+	}
+
+
+	public void updateAwardRecord(AwardRecord record){
+		String sql = "update tb_award_record set finished = ? where id = ?";
+		Connection connection = JDBCUtil.getConnection();
+		PreparedStatement pstmt = null;
+
+		try {
+			pstmt = connection.prepareStatement(sql);
+			pstmt.setString(1, record.getFinished());
+			pstmt.setInt(2, record.getId());
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(connection);
+			JDBCUtil.close(pstmt);
+		}
 	}
 
 }

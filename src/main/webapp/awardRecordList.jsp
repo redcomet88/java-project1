@@ -23,8 +23,7 @@
 
 <script type="text/html" id="barDemo">
 	<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-	<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	<a class="layui-btn layui-btn-xs" lay-event="edit">兑奖</a>
 </script>
 
 	<script src="layui/layui.js" charset="utf-8"></script>
@@ -36,17 +35,15 @@
 
             var table = layui.table;
 
-            table.render({
+            var tt = table.render({
                 elem: '#test'
-                ,url:'/AwardServlet?opt=search'
+                ,url:'/AwardServlet?opt=searchRecord'
                 ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 ,cols: [[
-                    {field:'index', width:80, title: 'ID', sort: true}
-                    ,{field:'awardName', width:150, title: '奖品名'}
-                    ,{field:'stock', width:80, title: '库存',event:'setStock' , sort: true}
-                    ,{field:'image', width:250, title: '图片地址'}
-                    ,{field:'column1', width:80,title: '备用'} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                    ,{field:'column2', width:80,title: '备注'}
+                    {field:'id', width:80, title: 'ID', sort: true}
+                    ,{field:'awardName', width:180, title: '奖品名'}
+                    ,{field:'userName', width:150, title: '用户名'}
+                    ,{field:'finished', width:150, title: '是否兑奖'}
                     ,{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}
                 ]]
             });
@@ -61,7 +58,21 @@
                         layer.close(index);
                     });
                 } else if(obj.event === 'edit'){
-                    layer.alert('请注意：<br>'+ "请直接在单元格上点击进行修改")
+
+                    //ajax操作
+                    $.ajax({
+                        url: "/AwardServlet",
+                        data:{index: data.index,opt: 'updateRecord',id:data.id},
+                        type: "post",
+                        dataType: 'text',
+                        success: function (text) {
+							tt.reload();
+                        },
+                        error: function(text){
+                            ;
+                        }
+                    });
+
                 }
                else  if(obj.event === 'setStock'){
                     layer.prompt({
